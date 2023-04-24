@@ -375,7 +375,9 @@ class ClusterAddOn(Cluster):
             for sample in TimeoutSampler(
                 wait_timeout=TIMEOUT_30MIN,
                 sleep=SLEEP_1SEC,
-                func=lambda: RHMI(name="rhoam", namespace="redhat-rhoam-operator"),
+                func=lambda: RHMI(
+                    name="rhoam", namespace="redhat-rhoam-operator"
+                ).exists,
                 exceptions_dict=NOT_FOUND_ERROR_EXCEPTION_DICT,
             ):
                 if sample:
